@@ -30,14 +30,14 @@ class Frontend {
 		$show_close_button = isset( $settings['enable_hide_button'] ) ? 'flex' : 'none';;
 		$close_button_location = (isset( $settings['button_location'] ) && $settings['button_location'] == 'left') ? 'right' : 'left';;
 		$close_button_ilh = ( isset( $settings['enable_hide_button'] ) && $settings['hide_button'] == 'full' ) ? '1' : '1.2'; //inner line height
-		$icon_size = ! empty( $settings['icon_size'] ) ? sanitize_text_field( $settings['icon_size'] ) : '80';
+		$icon_size = ! empty( $settings['icon_size'] ) ? $settings['icon_size'] : '80';
 		$icon_size_mu = ! empty( $settings['icon_size_mu'] ) ? $settings['icon_size_mu'] : 'px';
 
 		ob_start();
 		?>
 		<style type="text/css">
 			<?php if ( isset( $settings['enable_breakpoint'] ) ) { ?>
-				@media only screen and (min-width: <?php echo $breakpoint.'px'; ?>) {
+				@media only screen and (min-width: <?php echo esc_html( $breakpoint ).'px'; ?>) {
 					.wab-cont {
 						display: none;
 					}
@@ -81,7 +81,7 @@ class Frontend {
 
 			.wab-side-rectangle.wab-cont {
 				position: fixed;
-				bottom: <?php echo $distance_from_bottom; echo $distance_from_bottom_mu; ?>;
+				bottom: <?php echo esc_html( $distance_from_bottom . $distance_from_bottom_mu ); ?>;
 				z-index: 99997;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
@@ -101,17 +101,17 @@ class Frontend {
 			.wab-side-rectangle #whatsAppButton {
 				display: block;
 				position: relative;
-				direction: <?php echo $wp_text_direction; ?>;
+				direction: <?php echo esc_html( $wp_text_direction ); ?>;
 				z-index: 9999;
 				cursor: pointer;
 				min-width: 50px;
 				max-width: 236px;
-				color: <?php echo $button_text_color; ?>;
+				color: <?php echo esc_html( $button_text_color ); ?>;
 				text-align: center;
 				text-decoration: none;
 				padding: 10px 14px;
 				margin: 0 auto 0 auto;
-				background: <?php echo $button_bg_color; ?>;
+				background: <?php echo esc_html( $button_bg_color ); ?>;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
 				-o-transition: All 0.5s ease;
@@ -133,12 +133,12 @@ class Frontend {
 			}
 
 			.wab-side-rectangle #wab_close {
-				display: <?php echo $show_close_button; ?>;
+				display: <?php echo esc_html( $show_close_button ); ?>;
 				align-items: center;
     			justify-content: center;
 				position: absolute;
 				top: -10px;
-				<?php echo $close_button_location; ?>: -9px;
+				<?php echo esc_html( $close_button_location ); ?>: -9px;
 				z-index: 999999;
 				background-color: #fff;
 				font-weight: bold;
@@ -147,7 +147,7 @@ class Frontend {
 				border-radius: 12px;
 				height: 20px;
 				width: 20px;
-				line-height: <?php echo $close_button_ilh ?>;
+				line-height: <?php echo esc_html( $close_button_ilh ); ?>;
 				text-align: center;
 				cursor: pointer;
 			}
@@ -187,15 +187,15 @@ class Frontend {
 				position: absolute;
 				bottom: 0;
 				width: 100%;
-				direction: <?php echo $wp_text_direction; ?>;
+				direction: <?php echo esc_html( $wp_text_direction ); ?>;
 				z-index: 9999;
 				cursor: pointer;
-				color: <?php echo $button_text_color; ?>;
+				color: <?php echo esc_html( $button_text_color ); ?>;
 				text-align: center;
 				text-decoration: none;
 				padding: 10px;
 				margin: 0 auto 0 auto;
-				background: <?php echo $button_bg_color; ?>;
+				background: <?php echo esc_html( $button_bg_color ); ?>;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
 				-o-transition: All 0.5s ease;
@@ -204,12 +204,12 @@ class Frontend {
 			}
 
 			.wab-bottom-rectangle #wab_close {
-				display: <?php echo $show_close_button; ?>;
+				display: <?php echo esc_html( $show_close_button ); ?>;
 				align-items: center;
     			justify-content: center;
 				position: absolute;
 				bottom: 38px;
-				<?php echo $close_button_location; ?>: 10px;
+				<?php echo esc_html( $close_button_location ); ?>: 10px;
 				z-index: 999999;
 				background-color: #fff;
 				font-weight: bold;
@@ -218,7 +218,7 @@ class Frontend {
 				border-radius: 10px;
 				height: 20px;
 				width: 20px;
-				line-height: <?php echo $close_button_ilh ?>;
+				line-height: <?php echo esc_html( $close_button_ilh ); ?>;
 				text-align: center;
 				cursor: pointer;
 			}
@@ -260,8 +260,8 @@ class Frontend {
 			
 			.wab-icon-styled.wab-cont, .wab-icon-plain.wab-cont {
 				position: fixed;
-				<?php echo $button_location; ?>: 10px;
-				bottom: <?php echo $distance_from_bottom; echo $distance_from_bottom_mu; ?>;
+				<?php echo esc_html( $button_location ); ?>: 10px;
+				bottom: <?php echo esc_html( $distance_from_bottom . $distance_from_bottom_mu ); ?>;
 				z-index: 99999;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
@@ -272,11 +272,11 @@ class Frontend {
 
 			.wab-icon-styled #whatsAppButton, .wab-icon-plain #whatsAppButton {
 				display: block;
-				width: <?php echo $icon_size . $icon_size_mu; ?>;
-				height: <?php echo $icon_size . $icon_size_mu; ?>;
+				width: <?php echo esc_html( $icon_size . $icon_size_mu ); ?>;
+				height: <?php echo esc_html( $icon_size . $icon_size_mu ); ?>;
 				background-position: center center;
 				background-size: cover;
-				background-image: url(<?php echo plugins_url( '../../img/wa-icon-original.png', __FILE__ ); ?>);
+				background-image: url(<?php echo esc_url( plugins_url( '../../img/wa-icon-original.png', __FILE__ ) ); ?>);
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
 				-o-transition: All 0.5s ease;
@@ -293,12 +293,12 @@ class Frontend {
 			}
 
 			.wab-icon-styled #wab_close, .wab-icon-plain #wab_close {
-				display: <?php echo $show_close_button; ?>;
+				display: <?php echo esc_html( $show_close_button ); ?>;
 				align-items: center;
     			justify-content: center;
 				position: absolute;
 				top: -2px;
-				<?php echo $close_button_location; ?>: -5px;
+				<?php echo esc_html( $close_button_location ); ?>: -5px;
 				z-index: 999999;
 				background-color: #fff;
 				font-weight: bold;
@@ -307,13 +307,13 @@ class Frontend {
 				border-radius: 10px;
 				height: 20px;
 				width: 20px;
-				line-height: <?php echo $close_button_ilh ?>;
+				line-height: <?php echo esc_html( $close_button_ilh ); ?>;
 				text-align: center;
 				cursor: pointer;
 			}
 			
 			#wab_cont.wab-icon-styled.wab-hidden, #wab_cont.wab-icon-plain.wab-hidden {
-				<?php echo $button_location ?>: -64px;
+				<?php echo esc_html( $button_location ); ?>: -64px;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
 				-o-transition: All 0.5s ease;

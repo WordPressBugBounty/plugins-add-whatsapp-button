@@ -26,7 +26,7 @@ class Admin {
 		$button_text_color = ! empty( $settings['button_text_color'] ) ? $settings['button_text_color'] : '#ffffff';
 		$button_location = isset( $settings['button_location'] ) ? $settings['button_location'] : 'right';
 		$wp_text_direction = is_rtl() ? 'rtl' : 'ltr';
-		$icon_size = ! empty( $settings['icon_size'] ) ? sanitize_text_field( $settings['icon_size'] ) : '80';
+		$icon_size = ! empty( $settings['icon_size'] ) ? $settings['icon_size'] : '80';
 		$icon_size_mu = ! empty( $settings['icon_size_mu'] ) ? $settings['icon_size_mu'] : 'px';
 
 		?>
@@ -53,25 +53,25 @@ class Admin {
 
 			.wp-admin .wab-side-rectangle.wab-cont {
 				position: absolute;
-				<?php echo $button_location; ?>: 0;
-				bottom: <?php echo $distance_from_bottom; echo $distance_from_bottom_mu; ?>;
+				<?php echo esc_html( $button_location ); ?>: 0;
+				bottom: <?php echo esc_html( $distance_from_bottom ); echo esc_html( $distance_from_bottom_mu ); ?>;
 				z-index: 99999;
 			}
 
 			.wp-admin .wab-side-rectangle #whatsAppButton {
 				display: block;
 				position: relative;
-				direction: <?php echo $wp_text_direction; ?>;
+				direction: <?php echo esc_html( $wp_text_direction ); ?>;
 				z-index: 9999;
 				cursor: pointer;
 				min-width: 50px;
 				max-width: 236px;
-				color: <?php echo $button_text_color; ?>;
+				color: <?php echo esc_html( $button_text_color ); ?>;
 				text-align: center;
 				text-decoration: none;
 				padding: 10px;
 				margin: 0 auto 0 auto;
-				background: <?php echo $button_bg_color; ?>;
+				background: <?php echo esc_html( $button_bg_color ); ?>;
 				-webkit-transition: All 0.5s ease;
 				-moz-transition: All 0.5s ease;
 				-o-transition: All 0.5s ease;
@@ -104,30 +104,30 @@ class Admin {
 			.wp-admin .wab-bottom-rectangle #whatsAppButton {
 				display: block;
 				position: relative;
-				direction: <?php echo $wp_text_direction; ?>;
+				direction: <?php echo esc_html( $wp_text_direction ); ?>;
 				z-index: 9999;
 				cursor: pointer;
-				color: <?php echo $button_text_color; ?>;
+				color: <?php echo esc_html( $button_text_color ); ?>;
 				text-align: center;
 				text-decoration: none;
 				padding: 10px;
 				margin: 0 auto 0 auto;
-				background: <?php echo $button_bg_color; ?>;
+				background: <?php echo esc_html( $button_bg_color ); ?>;
 			}
 
 			/* Icon */
 			
 			.wp-admin .wab-icon-styled.wab-cont, .wp-admin .wab-icon-plain.wab-cont {
 				position: absolute;
-				<?php echo $button_location; ?>: 10px;
-				bottom: <?php echo $distance_from_bottom; echo $distance_from_bottom_mu; ?>;
+				<?php echo esc_html( $button_location ); ?>: 10px;
+				bottom: <?php echo esc_html( $distance_from_bottom . $distance_from_bottom_mu ); ?>;
 				z-index: 99999;
 			}
 
 			.wp-admin .wab-icon-styled #whatsAppButton, .wp-admin .wab-icon-plain #whatsAppButton {
 				display: block;
-				width: <?php echo $icon_size . $icon_size_mu; ?>;
-				height: <?php echo $icon_size . $icon_size_mu; ?>;
+				width: <?php echo esc_html( $icon_size . $icon_size_mu ); ?>;
+				height: <?php echo esc_html( $icon_size . $icon_size_mu ); ?>;
 				background-position: center center;
 				background-size: cover;
 			}
@@ -141,7 +141,7 @@ class Admin {
 			}
 
 			.wp-admin .wab-icon-plain.wab-pull-left #whatsAppButton, .wp-admin .wab-icon-plain.wab-pull-right #whatsAppButton {
-				background-image: url(<?php echo plugins_url( '../../img/wa-icon-original.png', __FILE__ ); ?>);
+				background-image: url(<?php echo esc_url( plugins_url( '../../img/wa-icon-original.png', __FILE__ ) ); ?>);
 			}
 			
 			.awb-displaynone {

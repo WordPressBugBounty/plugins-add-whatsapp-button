@@ -123,7 +123,7 @@ class Plugin {
 			get_admin_url() . '/options-general.php'
 		) );
 
-		$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+		$settings_link = "<a href='$url'>" . __( 'Settings', 'add-whatsapp-button' ) . '</a>';
 
 		array_push(
 			$links,
@@ -134,7 +134,7 @@ class Plugin {
 
 	// Load Plugin Textdomain
 	public function load_awb_textdomain() {
-		load_plugin_textdomain( 'add-whatsapp-button', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'add-whatsapp-button', "", basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
@@ -175,10 +175,9 @@ class Plugin {
 	public function print_button() {
 		$settings = $this->get_plugin_options();
 
-		$button_text = isset( $settings['button_text'] ) ? sanitize_text_field( $settings['button_text'] ) : _e('Message Us on WhatsApp', 'add-whatsapp-button');
+		$button_text = isset( $settings['button_text'] ) ? esc_html( $settings['button_text'] ) : __('Message Us on WhatsApp', 'add-whatsapp-button');
 		$displayNoneIfIcon = ( $settings['button_type'] == 'wab-icon-plain' || $settings['button_type'] == 'wab-icon-styled' ) ? 'awb-displaynone' : '';
 		$button_style = !empty( $settings['button_type'] ) ? $settings['button_type'] : 'wab-side-rectangle';
-		$user_agent = $_SERVER['HTTP_USER_AGENT'];
 		$close_button_icon = '';
 	
 		if ( 'wab-bottom-rectangle' !== $settings['button_type'] ) {
@@ -190,24 +189,24 @@ class Plugin {
 		}
 		else if ( 'hide' === $settings['hide_button'] ) {
 			if ( 'right' === $settings['button_location'] && 'wab-bottom-rectangle' !== $settings['button_type'] ) {
-				$close_button_icon = '<img class="wab-chevron wab-right" src="' . plugins_url( '/img/chevron-right.svg', __FILE__ ) . '" />';
+				$close_button_icon = '<img class="wab-chevron wab-right" src="' . esc_url( plugins_url( '/img/chevron-right.svg', __FILE__ ) ) . '" />';
 			} else if ( 'left' === $settings['button_location'] && 'wab-bottom-rectangle' !== $settings['button_type'] ) {
-				$close_button_icon = '<img class="wab-chevron wab-left" src="' . plugins_url( '/img/chevron-left.svg', __FILE__ ) . '" />';
+				$close_button_icon = '<img class="wab-chevron wab-left" src="' . esc_url( plugins_url( '/img/chevron-left.svg', __FILE__ ) ) . '" />';
 			} else if ( 'wab-bottom-rectangle' === $settings['button_type'] ) {
-				$close_button_icon = '<img class="wab-chevron wab-down" src="' . plugins_url( '/img/chevron-down.svg', __FILE__ ) . '" />';
+				$close_button_icon = '<img class="wab-chevron wab-down" src="' . esc_url( plugins_url( '/img/chevron-down.svg', __FILE__ ) ) . '" />';
 			}
 		}
 	
 		ob_start(); 
 		?>
 	
-			<div id="wab_cont"  class="wab-cont ui-draggable <?php echo $button_style; ?> <?php echo $button_location; ?>">
-				<a id="whatsAppButton" href="https://wa.me/<?php echo esc_html( $settings['phone_number'] ); ?><?php echo ( !empty($settings['default_message']) && $settings['enable_message'] == '1' ) ? '/?text='. rawurlencode($settings['default_message']) : ''; ?>" target="_blank"><span class="<?php echo $displayNoneIfIcon; ?>"><?php echo $button_text; ?></span></a>
+			<div id="wab_cont"  class="wab-cont ui-draggable <?php echo esc_html( $button_style . ' ' . $button_location ); ?>">
+				<a id="whatsAppButton" href="https://wa.me/<?php echo esc_html( $settings['phone_number'] ); ?><?php echo ( !empty($settings['default_message']) && $settings['enable_message'] == '1' ) ? '/?text='. esc_html( rawurlencode($settings['default_message']) ) : ''; ?>" target="_blank"><span class="<?php echo esc_html(  $displayNoneIfIcon ); ?>"><?php echo esc_html( $button_text ); ?></span></a>
 				<?php if ( isset( $settings['enable_dragging'] ) ) : ?>
-					<div id="wab_drag"><img src="<?php echo plugins_url( '/img/drag-horizontal.svg', __FILE__ ) ?>"></div>
+					<div id="wab_drag"><img src="<?php echo esc_url( plugins_url( '/img/drag-horizontal.svg', __FILE__ ) ); ?>"></div>
 				<?php endif; ?>
 				<?php if ( isset( $settings['enable_hide_button'] ) && isset( $settings['hide_button'] ) ) : ?>
-					<div id="wab_close"><?php echo $close_button_icon; ?></div>
+					<div id="wab_close"><?php echo wp_kses_post( $close_button_icon ); ?></div>
 				<?php endif; ?>
 			</div>
 			
