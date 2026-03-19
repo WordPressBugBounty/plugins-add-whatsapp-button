@@ -1,9 +1,9 @@
 === Add Chat App Button ===
 Contributors: udidol
 Tags: whatsapp, button, whatsapp button
-Requires at least: 4.6
-Tested up to: 6.7
-Stable tag: 2.1.8
+Requires at least: 7.0
+Tested up to: 6.9.4
+Stable tag: 2.1.9
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,8 +53,9 @@ The plugin detects whether the site visitor is using a desktop or mobile device 
 
 == Changelog ==
 
-= 2.1.8 =
-* Maintenance update.
+= 2.1.9 =
+* Updated compatibility with WordPress 6.9.4
+* Fixed some UI bugs in the button preview in admin settings.
 
 = 2.1.7 =
 * Security update.
